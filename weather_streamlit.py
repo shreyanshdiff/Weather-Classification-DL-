@@ -12,7 +12,7 @@ import plotly.express as px
 import log  # Import the MLflow logging script
 from api import API 
 # Load your trained RNN model and scaler
-rnn_model = load_model('weather_rnn.h5')
+# rnn_model = load_model('weather_rnn.h5')
 scaler = joblib.load('scaler.pkl')
 
 # Load your trained CNN model
@@ -34,14 +34,14 @@ img_height, img_width = 150, 150
 # chatbot_model = AutoModelForCausalLM.from_pretrained("microsoft/DialoGPT-medium")
 
 # Function to predict weather using RNN
-def predict_weather(temp, dew_point_temp, rel_hum, wind_dir, wind_spd, stn_press):
-    input_data = np.array([[temp, dew_point_temp, rel_hum, wind_dir, wind_spd, stn_press]])
-    input_data = scaler.transform(input_data)
-    input_sequence = np.tile(input_data, (3, 1))
-    input_sequence = np.reshape(input_sequence, (1, 3, 6))
-    prediction = rnn_model.predict(input_sequence)[0, 0]
-    prediction = scaler.inverse_transform([[prediction, 0, 0, 0, 0, 0]])[0, 0]
-    return prediction
+# def predict_weather(temp, dew_point_temp, rel_hum, wind_dir, wind_spd, stn_press):
+#     input_data = np.array([[temp, dew_point_temp, rel_hum, wind_dir, wind_spd, stn_press]])
+#     input_data = scaler.transform(input_data)
+#     input_sequence = np.tile(input_data, (3, 1))
+#     input_sequence = np.reshape(input_sequence, (1, 3, 6))
+#     prediction = rnn_model.predict(input_sequence)[0, 0]
+#     prediction = scaler.inverse_transform([[prediction, 0, 0, 0, 0, 0]])[0, 0]
+#     return prediction
 
 # Function to preprocess the uploaded image for CNN
 def preprocess_image(uploaded_file):
